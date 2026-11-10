@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Giovanno | Personal Portfolio</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-dark-hero: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            --transition-speed: 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        /* Navbar Customization */
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-speed);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #60a5fa !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #172554, #2563eb);
+            color: white;
+            padding: 130px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, var(--bs-body-bg), transparent);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        /* Custom Cards */
+        .custom-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            background-color: var(--bs-card-bg);
+        }
+
+        [data-bs-theme="dark"] .custom-card {
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .custom-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Profile Image */
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #2563eb;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            color: var(--bs-heading-color);
+            font-weight: 800;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: #2563eb;
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            color: #1e3a8a;
+            padding: 60px 20px;
+            border-radius: 24px;
+            margin: 40px 0;
+        }
+
+        [data-bs-theme="dark"] .quote-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #93c5fd;
+        }
+
+        /* Progress Bar */
+        .progress {
+            height: 14px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background var(--transition-speed);
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Section Padding */
+        section {
+            padding: 80px 0;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fa-solid fa-graduation-cap me-2 text-primary"></i>Giovanno.
+            </a>
+
+            <div class="d-flex align-items-center order-lg-3 gap-2">
+                <button class="theme-toggle-btn me-2" id="themeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hobbies">Hobbies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#goals">Goals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <div class="container position-relative z-1">
+            <span class="badge bg-light text-primary fs-6 px-3 py-2 rounded-pill mb-3">Welcome to My Portfolio</span>
+            <h1>Hello, I'm Giovanno!</h1>
+            <h4 class="mt-3 text-light fw-normal">Grade 9 Student | Future Businessman</h4>
+            <p class="mt-3 max-w-xl mx-auto fs-5 text-white-50" style="max-width: 600px;">
+                Welcome to my personal portfolio website. Get to know more about my journey, passions, academic achievements, and future ambitions.
+            </p>
+            <div class="mt-4">
+                <a href="#about" class="btn btn-light btn-lg rounded-pill px-4 me-2 shadow-sm fw-bold">
+                    Discover More <i class="fa-solid fa-arrow-down ms-1"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline-light btn-lg rounded-pill px-4">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ABOUT ME -->
+    <section id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">About Me</h2>
+            </div>
+
+            <div class="row align-items-center mt-4 g-5">
+                <div class="col-lg-4 text-center">
+                    <div class="profile-img-container">
+                        <!-- Profile Image -->
+                        <img src="WIN_20261105_11_18_22_Pro.jpg" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/220x220/2563eb/ffffff?text=Giovanno';" 
+                             class="profile-img" 
+                             alt="Giovanno's Profile Photo">
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <h3 class="fw-bold mb-3">Personal Profile</h3>
+                    <p class="fs-5 text-secondary">
+                        My name is <strong>Giovanno</strong>. I was born in Jakarta, Indonesia, and I am currently a Grade 9 student studying at <strong>SMPS Harapan Prestasi</strong>.
+                    </p>
+                    <p class="text-secondary">
+                        I enjoy travelling, exploring new horizons, acquiring fresh knowledge, and playing football. I am constantly seeking opportunities to broaden my understanding, take on challenges, and build solid foundation skills for my growth.
+                    </p>
+                    <p class="text-secondary">
+                        Driven by a vision for leadership and innovation, my ambition is to become a successful businessman and build a meaningful, rewarding career.
+                    </p>
+
+                    <div class="p-4 rounded-4 bg-body-tertiary mt-4 border">
+                        <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-lightbulb me-2"></i>Fun Facts About Me</h5>
+                        <ul class="list-unstyled mb-0 d-grid gap-2">
+                            <li><i class="fa-solid fa-check text-success me-2"></i><strong>Dream Career:</strong> Becoming a successful entrepreneur & businessman.</li>
+                            <li><i class="fa-solid fa-check text-success me-2"></i><strong>Dream Destination:</strong> Travelling across Japan 🇯🇵.</li>
+                            <li><i class="fa-solid fa-check text-success me-2"></i><strong>Hometown:</strong> Born and raised in Jakarta, Indonesia 🇮🇩.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HOBBIES -->
+    <section id="hobbies" class="bg-body-tertiary">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">My Hobbies</h2>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="p-3 bg-primary bg-opacity-10 rounded-circle text-primary mb-3">
+                                <i class="fa-solid fa-plane-departure fa-2x"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Travelling</h5>
+                            <p class="card-text text-secondary mt-2">
+                                I enjoy visiting new places, discovering diverse cultures, and creating unforgettable memories around the world.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="p-3 bg-success bg-opacity-10 rounded-circle text-success mb-3">
+                                <i class="fa-solid fa-book-open-reader fa-2x"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Learning New Things</h5>
+                            <p class="card-text text-secondary mt-2">
+                                I am passionate about gaining new perspectives, exploring intriguing subjects, and sharpening my skill set daily.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="p-3 bg-warning bg-opacity-10 rounded-circle text-warning mb-3">
+                                <i class="fa-solid fa-futbol fa-2x"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Playing Football</h5>
+                            <p class="card-text text-secondary mt-2">
+                                Football keeps me active and energetic while helping me foster leadership, strategy, and strong teamwork skills.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- GOALS -->
+    <section id="goals">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">My Goals</h2>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-md-6">
+                    <div class="card custom-card p-4 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fa-solid fa-bullseye text-danger fa-2x me-3"></i>
+                                <h4 class="card-title fw-bold mb-0">Short-Term Goals</h4>
+                            </div>
+                            <hr>
+                            <ul class="list-group list-group-flush border-0">
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Improve my mathematics capabilities and problem-solving speed.</li>
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Enhance my English fluency and communication skills.</li>
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Achieve outstanding academic results throughout Grade 9.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card custom-card p-4 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fa-solid fa-rocket text-primary fa-2x me-3"></i>
+                                <h4 class="card-title fw-bold mb-0">Long-Term Goals</h4>
+                            </div>
+                            <hr>
+                            <ul class="list-group list-group-flush border-0">
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Graduate from high school and university with top academic honors.</li>
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Establish and scale a successful global enterprise.</li>
+                                <li class="list-group-bg border-0 px-0 py-2"><i class="fa-solid fa-angle-right text-primary me-2"></i>Continuously develop impactful leadership skills for the future.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAVORITE QUOTE -->
+            <div class="quote-section text-center shadow-sm">
+                <i class="fa-solid fa-quote-left fa-2x mb-3 opacity-50"></i>
+                <p class="fs-4 fst-italic mb-2 fw-medium">
+                    "Enjoy the little things, for one day you may look back and realize they were the big things."
+                </p>
+                <h6 class="fw-bold mb-0">— Robert Brault</h6>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section id="projects" class="bg-body-tertiary">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Activities & Projects</h2>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-md-4">
+                    <div class="card custom-card p-3 h-100">
+                        <div class="card-body">
+                            <div class="text-primary mb-3"><i class="fa-solid fa-diagram-project fa-2x"></i></div>
+                            <h5 class="card-title fw-bold">School Projects</h5>
+                            <p class="card-text text-secondary mt-2">
+                                Collaborative and individual assignments completed at SMPS Harapan Prestasi. These help me build critical thinking, creativity, and deeper subject comprehension.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card custom-card p-3 h-100">
+                        <div class="card-body">
+                            <div class="text-success mb-3"><i class="fa-solid fa-calculator fa-2x"></i></div>
+                            <h5 class="card-title fw-bold">Math Extracurricular</h5>
+                            <p class="card-text text-secondary mt-2">
+                                Active participation in specialized mathematics activities, sharpening numerical analysis, logical reasoning, and complex problem-solving abilities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card custom-card p-3 h-100">
+                        <div class="card-body">
+                            <div class="text-warning mb-3"><i class="fa-solid fa-lightbulb fa-2x"></i></div>
+                            <h5 class="card-title fw-bold">Personal Projects</h5>
+                            <p class="card-text text-secondary mt-2">
+                                Independent initiatives created out of curiosity and passion. These projects serve as a canvas for self-expression, skill-building, and creative exploration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">My Skills & Languages</h2>
+            </div>
+
+            <div class="row g-5 mt-2 align-items-center">
+                <div class="col-md-6">
+                    <h4 class="fw-bold mb-4"><i class="fa-solid fa-gears text-primary me-2"></i>Proficiencies</h4>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-semibold">Canva Design</span>
+                            <span class="text-primary fw-bold">85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-semibold">Drawing & Sketching</span>
+                            <span class="text-info fw-bold">85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-semibold">Teamwork & Collaboration</span>
+                            <span class="text-success fw-bold">65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="fw-bold mb-4"><i class="fa-solid fa-language text-primary me-2"></i>Languages Spoken</h4>
+
+                    <div class="card custom-card p-4">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="fs-3 me-3">🇬🇧</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">English</h6>
+                                    <small class="text-secondary">Professional Academic Proficiency</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="fs-3 me-3">🇮🇩</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">Indonesian</h6>
+                                    <small class="text-secondary">Native / Fluent</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center">
+                                <span class="fs-3 me-3">🇨🇳</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0">Mandarin</h6>
+                                    <small class="text-secondary">Conversational / Learning</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="bg-body-tertiary text-center">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <p class="fs-5 text-secondary max-w-lg mx-auto mb-4" style="max-width: 600px;">
+                Thank you for visiting my personal portfolio! Feel free to reach out via email for inquiries or collaborations.
+            </p>
+
+            <div class="d-inline-block p-4 custom-card rounded-4">
+                <a href="mailto:giovanno.antoli@harapanprestasi.sch.id" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                    <i class="fa-solid fa-envelope me-2"></i>giovanno.antoli@harapanprestasi.sch.id
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container text-center">
+            <p class="mb-1 fw-medium">© 2026 Giovanno | Personal Portfolio</p>
+            <p class="mb-0 text-white-50 small">Crafted with Bootstrap 5 & Modern Web Standards</p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Theme Switcher Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            themeIcon.className = newTheme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        });
+    </script>
+</body>
+</html>
